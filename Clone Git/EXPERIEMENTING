@@ -44,5 +44,5 @@ def _main():
         print(_json.dumps(_res, ensure_ascii=False))
     else:
         print(_res)
-
+print("running test cases")
 _main()
