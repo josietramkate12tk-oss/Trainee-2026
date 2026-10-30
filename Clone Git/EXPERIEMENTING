@@ -1,0 +1,48 @@
+import sys as _sys, json as _json
+def solution(text, word, n):
+    letters = [0 for i in range(26)]
+    for alp in text:
+        letters[ord(alp) - ord('a')] += 1
+
+    make_possible = 0
+    flag = True
+    while flag:
+        for alp in word:
+            if letters[ord(alp) - ord('a')] <= 0:
+                flag = False
+                break
+            else:
+                letters[ord(alp) - ord('a')] -= 1
+        if not flag:
+            make_possible += 1
+    
+    return make_possible == n
+
+
+def _main():
+    _data = _sys.stdin.read().split('\n')
+    _i = 0
+    def _line():
+        nonlocal _i
+        _v = _data[_i] if _i < len(_data) else ''
+        _i += 1
+        return _v
+    def _val(_s):
+        try:
+            return _json.loads(_s)
+        except Exception:
+            return _s
+    _a0 = _val(_line())
+    _a1 = _val(_line())
+    _a2 = _val(_line())
+    _res = solution(_a0, _a1, _a2)
+    if isinstance(_res, bool):
+        print('true' if _res else 'false')
+    elif _res is None:
+        print()
+    elif isinstance(_res, (list, dict)):
+        print(_json.dumps(_res, ensure_ascii=False))
+    else:
+        print(_res)
+
+_main()
